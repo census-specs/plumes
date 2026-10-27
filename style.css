@@ -1,0 +1,123 @@
+:root {
+  --vert: #2f6f5e;
+  --fond: #f7f6f2;
+  --carte: #ffffff;
+  --texte: #1d2521;
+  --gris: #6b7670;
+  --bord: #e4e2da;
+  --danger: #b3382c;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --fond: #151a18; --carte: #1f2623; --texte: #eceee9; --gris: #98a39d; --bord: #2f3834; }
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fond); color: var(--texte);
+  display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+}
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; background: var(--vert); color: #fff;
+}
+.topbar h1 { margin: 0; font-size: 1.25rem; }
+.btn-rond {
+  width: 40px; height: 40px; border-radius: 50%; border: 0;
+  background: #fff; color: var(--vert); font-size: 1.6rem; line-height: 1;
+}
+main { flex: 1; overflow-y: auto; position: relative; }
+.vue { display: none; padding: 12px 16px 24px; }
+.vue.active { display: block; }
+.liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.liste li {
+  background: var(--carte); border: 1px solid var(--bord);
+  border-radius: 12px; padding: 12px 14px;
+}
+.liste .titre { font-weight: 600; margin-bottom: 2px; }
+.liste .apercu { color: var(--gris); font-size: .9rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vide { text-align: center; color: var(--gris); margin-top: 48px; }
+.onglets {
+  display: flex; border-top: 1px solid var(--bord); background: var(--carte);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.onglet {
+  flex: 1; padding: 14px 0; border: 0; background: none;
+  font-size: 1rem; color: var(--gris);
+}
+.onglet.active { color: var(--vert); font-weight: 700; }
+.edition-barre { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.btn-texte { border: 0; background: none; font-size: 1rem; color: var(--vert); padding: 8px 0; }
+.btn-texte.danger { color: var(--danger); }
+.note-titre {
+  width: 100%; border: 0; background: none; color: inherit;
+  font-size: 1.4rem; font-weight: 700; padding: 8px 0; outline: none;
+}
+
+/* ---------- Barre d'outils de l'éditeur ---------- */
+.outils {
+  position: sticky; top: 0; z-index: 5;
+  margin: 0 -16px 4px; padding: 6px 16px;
+  background: var(--fond); border-bottom: 1px solid var(--bord);
+}
+.outils-ligne {
+  display: flex; align-items: center; gap: 6px;
+  overflow-x: auto; scrollbar-width: none; padding: 2px 0;
+}
+.outils-ligne::-webkit-scrollbar { display: none; }
+.outils-ligne + .outils-ligne { margin-top: 6px; }
+.outils button {
+  flex: 0 0 auto; min-width: 42px; height: 40px; padding: 0 10px;
+  border: 1px solid var(--bord); border-radius: 10px;
+  background: var(--carte); color: var(--texte); font-size: 1rem;
+}
+.outils button:active { background: var(--vert); color: #fff; }
+.outils button.danger { color: var(--danger); }
+.palette span { flex: 0 0 auto; color: var(--gris); font-size: .85rem; }
+.outils button.pastille { min-width: 34px; width: 34px; height: 34px; padding: 0; border-radius: 50%; }
+.outils button.pastille.aucune { background: var(--carte); color: var(--gris); font-size: .8rem; }
+
+/* ---------- Contenu de la note ---------- */
+.note-contenu {
+  min-height: 55vh; line-height: 1.55; outline: none;
+  word-break: break-word; padding-bottom: 40vh;
+}
+.note-contenu:empty::before { content: attr(data-placeholder); color: var(--gris); }
+.note-contenu p { margin: 0 0 .6em; }
+.note-contenu h1 { font-size: 1.5rem; margin: .8em 0 .4em; }
+.note-contenu h2 { font-size: 1.25rem; margin: .8em 0 .4em; }
+.note-contenu ul, .note-contenu ol { margin: .4em 0; padding-left: 1.4em; }
+.note-contenu blockquote {
+  margin: .6em 0; padding: 4px 0 4px 12px;
+  border-left: 4px solid var(--vert); color: var(--gris);
+}
+.note-contenu pre {
+  background: var(--carte); border: 1px solid var(--bord); border-radius: 8px;
+  padding: 10px; overflow-x: auto; font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: .9rem; white-space: pre-wrap;
+}
+.note-contenu a { color: var(--vert); text-decoration: underline; }
+.note-contenu hr { border: 0; border-top: 1px solid var(--bord); margin: 1em 0; }
+.note-contenu table {
+  display: block; max-width: 100%; overflow-x: auto;
+  border-collapse: collapse; margin: .6em 0;
+}
+.note-contenu td, .note-contenu th {
+  border: 1px solid var(--bord); padding: 8px 10px; min-width: 70px; vertical-align: top;
+}
+
+/* Listes à cocher */
+.note-contenu ul.checklist { list-style: none; padding-left: 0; }
+.note-contenu ul.checklist li { position: relative; padding-left: 34px; min-height: 28px; }
+.note-contenu ul.checklist li::before {
+  content: ""; position: absolute; left: 4px; top: .2em;
+  width: 20px; height: 20px; border: 2px solid var(--gris); border-radius: 5px;
+  color: #fff; font-size: 14px; line-height: 16px; text-align: center;
+}
+.note-contenu ul.checklist li[data-fait]::before {
+  content: "✓"; background: var(--vert); border-color: var(--vert);
+}
+.note-contenu ul.checklist li[data-fait] { text-decoration: line-through; color: var(--gris); }

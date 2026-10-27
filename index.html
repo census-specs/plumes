@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2f6f5e">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <title>Plume</title>
+</head>
+<body>
+  <header class="topbar">
+    <h1 id="titre-ecran">Notes</h1>
+    <button id="btn-ajouter" class="btn-rond" aria-label="Ajouter">+</button>
+  </header>
+
+  <main>
+    <section id="vue-notes" class="vue active">
+      <ul id="liste-notes" class="liste"></ul>
+      <p id="vide-notes" class="vide">Aucune note pour l'instant.<br>Touchez + pour commencer.</p>
+    </section>
+
+    <section id="vue-taches" class="vue">
+      <ul id="liste-taches" class="liste"></ul>
+      <p id="vide-taches" class="vide">Aucune tâche pour l'instant.</p>
+    </section>
+
+    <section id="vue-edition" class="vue">
+      <div class="edition-barre">
+        <button id="btn-retour" class="btn-texte">← Retour</button>
+        <button id="btn-supprimer" class="btn-texte danger">Supprimer</button>
+      </div>
+      <div id="outils" class="outils">
+        <div id="outils-boutons" class="outils-ligne"></div>
+        <div id="palette" class="outils-ligne palette" hidden></div>
+        <div id="outils-tableau" class="outils-ligne" hidden></div>
+      </div>
+      <input id="note-titre" class="note-titre" placeholder="Titre">
+      <div id="note-contenu" class="note-contenu" contenteditable="true"
+           data-placeholder="Écrivez ici…"></div>
+    </section>
+  </main>
+
+  <nav class="onglets">
+    <button class="onglet active" data-vue="notes">Notes</button>
+    <button class="onglet" data-vue="taches">Tâches</button>
+  </nav>
+
+  <script src="db.js"></script>
+  <script src="editor.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

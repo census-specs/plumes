@@ -1,0 +1,11 @@
+{
+  "name": "Plume",
+  "short_name": "Plume",
+  "description": "Notes et tâches synchronisées",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f6f2",
+  "theme_color": "#2f6f5e",
+  "icons": []
+}
